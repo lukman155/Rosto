@@ -1,0 +1,44 @@
+body {
+    background-color: rgb(239, 239, 239);
+    color: rgb(70, 70, 70);
+    font-size: 1rem;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+nav {
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+a {
+    text-decoration: none;
+}
+
+.logo {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 3rem;
+    margin: 1rem;
+}
+
+main {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    
+}
+
+footer {
+    background-color: rgb(70, 70, 70);
+    color: rgb(239, 239, 239);
+    padding: 1rem;
+    text-align: center;
+}
