@@ -16,14 +16,33 @@
       </nav>
     </header>
     <main>
-      <div class="container">
-        <!-- <img class="item-img" src="" alt="">
-            <p class="item-name">Unnamed</p>
-            <img src="" alt="" class="heart-img">
-            <p class="item-likes"></p>
-            <button class="comment-btn">Comments</button> -->
-      </div>
-      <button class="test">TEST</button>
+      <section>
+        <ul class="container"></ul>
+      </section>
+      <section class="overlay">
+        <article class="modal">
+          <div class="group">
+            <div class="modal-img">
+              <img src="" alt="" />
+            </div>
+            <img class="close" alt="close" />
+          </div>
+          <h3 class="product-title">title</h3>
+          <span>TAGS</span>
+          <p class="comments"></p>
+          <ul class="comments-list"></ul>
+          <h3 class="add-comment">Add comment</h3>
+          <form action="POST">
+            <input placeholder="Write your name" class="name" type="text" />
+            <input
+              placeholder="Write your insights"
+              class="insights"
+              type="text"
+            />
+            <button type="submit">Comment</button>
+          </form>
+        </article>
+      </section>
     </main>
     <footer>
       <div>
