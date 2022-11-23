@@ -8,6 +8,7 @@ logoImg.src = logo;
 closeImg.src = closeIcon;
 
 const baseURl = 'https://www.themealdb.com/api/json/v1/1/filter.php?c=Chicken';
+
 const commentsURL = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/QFvjY7RTqycik4cqN134/comments';
 const placeholderImg = 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.istockphoto.com%2Fphotos%2Fplaceholder-image&psig=AOvVaw1vn5H7sUkiIacQfXSh0py-&ust=1669294383106000&source=images&cd=vfe&ved=0CA8QjRxqFwoTCKi4qKesxPsCFQAAAAAdAAAAABAE';
 const postData = async (data = {}) => {
@@ -24,10 +25,12 @@ const postData = async (data = {}) => {
   return postedData;
 };
 
+
 const getMeals = async (url) => {
   const data = await fetch(url);
   return data.json();
 };
+
 
 const getCommentsList = async (id) => {
   const comments = await fetch(`${commentsURL}?item_id=${id}`);
@@ -77,13 +80,14 @@ const displayPopup = async (item) => {
 
     form.reset();
   });
+
 };
 
 const render = async () => {
   const data = await getMeals(baseURl);
   const container = document.querySelector('.container');
   container.innerHTML = '';
-  data.meals.forEach((item) => {
+  data.meals.forEach((item) => {  
     const card = document.createElement('li');
     card.classList.add('card');
     card.innerHTML = `
@@ -102,7 +106,7 @@ const render = async () => {
     btn.addEventListener('click', () => {
       displayPopup(item);
     });
-
+    
     info.appendChild(title);
     info.appendChild(btn);
     card.appendChild(info);
