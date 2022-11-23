@@ -1,27 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rosto</title>
-</head>
-<body>
+  </head>
+  <body>
     <header class="header">
-        <nav class="nav">
-        <a href="#"><img src="./images/Rosto.jpg" alt=""></a>
-        <ul class="nav__list">
-            <li class="nav__item"><a href="" class="nav__link">Home</a></li>
-            <li class="nav__item"><a href="" class="nav__link">About</a></li>
-            <li class="nav__item"><a href="" class="nav__link">Services</a></li>
-            <li class="nav__item"><a href="" class="nav__link">Contact</a></li>
-        </ul>
+      <nav class="nav">
+        <a href="#"><img class="logo" alt="" /></a>
+        <a href="#" class="nav-link beef">Beef</a>
+        <a href="" class="nav-link">Chicken</a>
+        <a href="" class="nav-link">Seafood</a>
+      </nav>
     </header>
-
+    <main>
+      <section>
+        <ul class="container"></ul>
+      </section>
+      <section class="overlay">
+        <article class="modal">
+          <div class="modal-img">
+            <img src="" alt="" />
+          </div>
+          <h3 class="product-title">title</h3>
+          <span>TAGS</span>
+          <p class="comments"></p>
+          <ul class="comments-list"></ul>
+          <h3 class="add-comment">Add comment</h3>
+          <form action="POST">
+            <input class="name" type="text" />
+            <input class="insights" type="text" />
+            <button type="submit">Comment</button>
+          </form>
+        </article>
+      </section>
+    </main>
     <footer>
-        <div>
-            <p>Created by Ahmed and Lukman</p>
-        </div>
+      <div>
+        <p>Created by Ahmed and Lukman</p>
+      </div>
     </footer>
-</body>
+  </body>
 </html>
