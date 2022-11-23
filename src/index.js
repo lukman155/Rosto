@@ -5,10 +5,8 @@ const logoImg = document.querySelector('.logo');
 
 logoImg.src = logo;
 const baseURl = 'https://www.themealdb.com/api/json/v1/1/filter.php?c=Chicken';
-const commentsURL =
-  'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/QFvjY7RTqycik4cqN134/comments';
-const placeholderImg =
-  'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.istockphoto.com%2Fphotos%2Fplaceholder-image&psig=AOvVaw1vn5H7sUkiIacQfXSh0py-&ust=1669294383106000&source=images&cd=vfe&ved=0CA8QjRxqFwoTCKi4qKesxPsCFQAAAAAdAAAAABAE';
+const commentsURL = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/QFvjY7RTqycik4cqN134/comments';
+const placeholderImg = 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.istockphoto.com%2Fphotos%2Fplaceholder-image&psig=AOvVaw1vn5H7sUkiIacQfXSh0py-&ust=1669294383106000&source=images&cd=vfe&ved=0CA8QjRxqFwoTCKi4qKesxPsCFQAAAAAdAAAAABAE';
 const postData = async (data = {}) => {
   const postedData = await fetch(commentsURL, {
     method: 'POST',
@@ -68,20 +66,47 @@ const render = (data) => {
   const container = document.querySelector('.container');
   container.innerHTML = '';
   data.forEach((item) => {
-    container.innerHTML += `
-    <li class='card'>
-    <div class='img-holder'>
-      <img src='${item.strMealThumb}' alt='' />
-    </div>
-    <div class="info">
-      <h2 class="card-title">${item.strMeal}</h2>
-      <button onclick=''
-      )}' class='explore'>Explore more</button>
-    </div>
-  </li>
-`;
+    const card = document.createElement('li');
+    card.classList.add('card');
+    card.innerHTML = `
+      <div class='img-holder'>
+      <img src='${item.strMealThumb}' alt='${item.strMeal}' />
+      </div>`;
+    const info = document.createElement('div');
+    info.classList.add('info');
+    const title = document.createElement('h2');
+    title.classList.add('card-title');
+    title.textContent = item.strMeal;
+
+    const btn = document.createElement('button');
+    btn.classList.add('explore');
+    btn.textContent = 'View Recipe';
+    btn.addEventListener('click', () => {
+      displayPopup();
+    });
+
+    info.appendChild(title);
+    info.appendChild(btn);
+    card.appendChild(info);
+    container.appendChild(card);
   });
 };
+
+//   data.forEach((item) => {
+//     container.innerHTML += `
+//     <li class='card'>
+//     <div class='img-holder'>
+//       <img src='${item.strMealThumb}' alt='' />
+//     </div>
+//     <div class="info">
+//       <h2 class="card-title">${item.strMeal}</h2>
+//       <button onclick=''
+//       )}' class='explore'>Explore more</button>
+//     </div>
+//   </li>
+// `;
+//   });
+// };
 
 document.addEventListener('DOMContentLoaded', async () => {
   const data = await getMeals(baseURl);
