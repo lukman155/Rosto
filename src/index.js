@@ -25,12 +25,10 @@ const postData = async (data = {}) => {
   return postedData;
 };
 
-
 const getMeals = async (url) => {
   const data = await fetch(url);
   return data.json();
 };
-
 
 const getCommentsList = async (id) => {
   const comments = await fetch(`${commentsURL}?item_id=${id}`);
@@ -80,14 +78,13 @@ const displayPopup = async (item) => {
 
     form.reset();
   });
-
 };
 
 const render = async () => {
   const data = await getMeals(baseURl);
   const container = document.querySelector('.container');
   container.innerHTML = '';
-  data.meals.forEach((item) => {  
+  data.meals.forEach((item) => {
     const card = document.createElement('li');
     card.classList.add('card');
     card.innerHTML = `
@@ -106,7 +103,7 @@ const render = async () => {
     btn.addEventListener('click', () => {
       displayPopup(item);
     });
-    
+
     info.appendChild(title);
     info.appendChild(btn);
     card.appendChild(info);
