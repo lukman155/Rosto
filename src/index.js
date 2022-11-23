@@ -6,21 +6,22 @@ const logoImg = document.querySelector('.logo');
 logoImg.src = logo;
 const baseURl = 'https://www.themealdb.com/api/json/v1/1/filter.php?c=Chicken';
 const commentsURL = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/QFvjY7RTqycik4cqN134/comments';
-const placeholderImg = 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.istockphoto.com%2Fphotos%2Fplaceholder-image&psig=AOvVaw1vn5H7sUkiIacQfXSh0py-&ust=1669294383106000&source=images&cd=vfe&ved=0CA8QjRxqFwoTCKi4qKesxPsCFQAAAAAdAAAAABAE';
-const postData = async (data = {}) => {
-  const postedData = await fetch(commentsURL, {
-    method: 'POST',
-    mode: 'cors',
-    cache: 'no-cache',
-    credentials: 'same-origin',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(data),
-  });
-  console.log(postedData.json());
-  return postedData;
-};
+// const placeholderImg = 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.istockphoto.com%2Fphotos%2Fplaceholder-image&psig=AOvVaw1vn5H7sUkiIacQfXSh0py-&ust=1669294383106000&source=images&cd=vfe&ved=0CA8QjRxqFwoTCKi4qKesxPsCFQAAAAAdAAAAABAE';
+
+// const postData = async (data = {}) => {
+//   const postedData = await fetch(commentsURL, {
+//     method: 'POST',
+//     mode: 'cors',
+//     cache: 'no-cache',
+//     credentials: 'same-origin',
+//     headers: {
+//       'Content-Type': 'application/json',
+//     },
+//     body: JSON.stringify(data),
+//   });
+//   console.log(postedData.json());
+//   return postedData;
+// };
 
 const getMeals = async (url) => {
   const data = await fetch(url);
@@ -91,22 +92,6 @@ const render = (data) => {
     container.appendChild(card);
   });
 };
-
-//   data.forEach((item) => {
-//     container.innerHTML += `
-//     <li class='card'>
-//     <div class='img-holder'>
-//       <img src='${item.strMealThumb}' alt='' />
-//     </div>
-//     <div class="info">
-//       <h2 class="card-title">${item.strMeal}</h2>
-//       <button onclick=''
-//       )}' class='explore'>Explore more</button>
-//     </div>
-//   </li>
-// `;
-//   });
-// };
 
 document.addEventListener('DOMContentLoaded', async () => {
   const data = await getMeals(baseURl);
