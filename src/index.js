@@ -5,7 +5,6 @@ const logoImg = document.querySelector('.logo');
 
 logoImg.src = logo;
 const baseURl = 'https://www.themealdb.com/api/json/v1/1/filter.php?c=Chicken';
-const commentsURL = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/QFvjY7RTqycik4cqN134/comments';
 const likesURL = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/pbKps4ug2DMf8oQt8nU7/likes/';
 
 const postData = async (requestUrl, data = {}) => {
@@ -32,11 +31,11 @@ const getData = async (requestUrl) => {
 const getLikes = async (id) => {
   getData(likesURL)
     .then((data) => {
-      data.forEach((item) => {
-        const element = document.querySelector(`[for = '${id}']`);
-        if (item.item_id === id) {
+      data.forEach((like) => {
+        const element = document.querySelector(`.a${like.item_id}`);
+        if (like.item_id === id) {
           console.log('working');
-          element.nextElementSibling.innerHTML = `${item.likes} Likes`;
+          element.innerHTML = `${like.likes} Likes`;
         }
       });
     });
@@ -45,13 +44,11 @@ const getLikes = async (id) => {
 const renderLikes = async () => {
   const data = await fetch(likesURL);
   const likes = await data.json();
-  const likeCounter = document.querySelectorAll('.no-likes');
-  likeCounter.forEach((item) => {
-    likes.forEach((like) => {
-      if (item.previousElementSibling.getAttribute('for') === like.item_id) {
-        item.innerHTML = `${like.likes} Likes`;
-      }
-    });
+  likes.forEach((like) => {
+    if (like.item_id) {
+      const element = document.querySelector(`.a${like.item_id}`);
+      element.innerHTML = `${like.likes} Likes`;
+    }
   });
 };
 
@@ -137,15 +134,14 @@ const render = (data) => {
 
     const noLikes = document.createElement('span');
     noLikes.classList.add('no-likes');
+    noLikes.classList.add(`a${item.idMeal}`);
     noLikes.innerHTML = '';
-    
-
 
     const btn = document.createElement('button');
     btn.classList.add('explore');
     btn.textContent = 'View Recipe';
     btn.addEventListener('click', () => {
-      displayPopup();
+
     });
 
     getLikes();
