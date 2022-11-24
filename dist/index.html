@@ -10,20 +10,32 @@
     <header class="header">
       <nav class="nav">
         <a href="#"><img class="logo" alt="" /></a>
-        <a href="#" class="nav-link beef">Beef</a>
-        <a href="" class="nav-link">Chicken</a>
-        <a href="" class="nav-link">Seafood</a>
+        <a href="#" class="nav-link beef">Beef <span class="meal-count"></span></a>
+        <a href="" class="nav-link">Chicken <span class="meal-count"></span></a>
+        <a href="" class="nav-link">Seafood <span class="meal-count"></span></a>
       </nav>
     </header>
     <main>
-      <div class="container">
-        <!-- <img class="item-img" src="" alt="">
-            <p class="item-name">Unnamed</p>
-            <img src="" alt="" class="heart-img">
-            <p class="item-likes"></p>
-            <button class="comment-btn">Comments</button> -->
-      </div>
-      <button class="test">TEST</button>
+      <section>
+        <ul class="container"></ul>
+      </section>
+      <section class="overlay">
+        <article class="modal">
+          <div class="modal-img">
+            <img src="" alt="" />
+          </div>
+          <h3 class="product-title">title</h3>
+          <span>TAGS</span>
+          <p class="comments"></p>
+          <ul class="comments-list"></ul>
+          <h3 class="add-comment">Add comment</h3>
+          <form action="POST">
+            <input class="name" type="text" />
+            <input class="insights" type="text" />
+            <button type="submit">Comment</button>
+          </form>
+        </article>
+      </section>
     </main>
     <footer>
       <div>
