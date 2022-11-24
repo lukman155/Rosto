@@ -6,60 +6,58 @@ const logoImg = document.querySelector('.logo');
 logoImg.src = logo;
 const baseURl = 'https://www.themealdb.com/api/json/v1/1/filter.php?c=Chicken';
 const commentsURL = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/QFvjY7RTqycik4cqN134/comments';
-const likesURL = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/QFvjY7RTqycik4cqN134/likes';
-// const postData = async (data = {}) => {
-//   const postedData = await fetch(commentsURL, {
-//     method: 'POST',
-//     mode: 'cors',
-//     cache: 'no-cache',
-//     credentials: 'same-origin',
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//     body: JSON.stringify(data),
-//   });
-//   console.log(postedData.json());
-//   return postedData;
-// };
+const likesURL = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/pbKps4ug2DMf8oQt8nU7/likes/';
+
+const postData = async (requestUrl, data = {}) => {
+  const response = await fetch(requestUrl, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  });
+  console.log(response);
+  return response;
+};
+
+const postLikes = (id) => {
+  postData(likesURL, { item_id: id });
+};
+
+const getData = async (requestUrl) => {
+  const data = await fetch(requestUrl);
+  return data.json();
+};
+
+const getLikes = async (id) => {
+  getData(likesURL)
+    .then((data) => {
+      data.forEach((item) => {
+        const element = document.querySelector(`[for = '${id}']`);
+        if (item.item_id === id) {
+          console.log('working');
+          element.nextElementSibling.innerHTML = `${item.likes} Likes`;
+        }
+      });
+    });
+};
+
+const renderLikes = async () => {
+  const data = await fetch(likesURL);
+  const likes = await data.json();
+  const likeCounter = document.querySelectorAll('.no-likes');
+  likeCounter.forEach((item) => {
+    likes.forEach((like) => {
+      if (item.previousElementSibling.getAttribute('for') === like.item_id) {
+        item.innerHTML = `${like.likes} Likes`;
+      }
+    });
+  });
+};
 
 const getMeals = async (url) => {
   const data = await fetch(url);
   return data.json();
-};
-
-const getCommentsList = async (id) => {
-  const comments = await fetch(`${commentsURL}?item_id=${id}`);
-  return comments.json();
-};
-
-const displayPopup = async (item) => {
-  //   const commentsData = await getCommentsList(item.id);
-  //   console.log(item.id);
-  console.log('got logged without call!!');
-  //   const modal = document.querySelector('.overlay');
-
-  //   const img = document.querySelector('.modal-img img');
-  //   const productTitle = document.querySelector('.product-title');
-  //   const commentsText = document.querySelector('.comments');
-  //   const commentsList = document.querySelector('.comments-list');
-  //   const form = document.querySelector('form');
-  // img.src = item ? item.strMealThumb : placeholderImg;
-  // productTitle.textContent = item.strMeal;
-  // commentsText.textContent = `Comments (${commentsData.length})`;
-  //   modal.classList.add('active-modal');
-  //   commentsList.innerHTML = '';
-  //   commentsData.forEach((comment) => {
-  //     commentsList.innerHTML += `<li>
-  //      ${comment.username}: ${comment.insights}
-  //     <li/>`;
-  //   });
-
-  //   form.addEventListener('submit', async (e) => {
-  //     e.preventDefault();
-  //     const username = document.querySelector('.name').value;
-  //     const comment = document.querySelector('.insights').value;
-  //     await postData({ item_id: item.id, username, comment });
-  //   });
 };
 
 const likeTemplate = `
@@ -128,10 +126,20 @@ const render = (data) => {
     likeInput.type = 'checkbox';
     likeInput.setAttribute('id', `${item.idMeal}`);
     likeInput.classList.add('checkbox');
+    likeInput.addEventListener('click', () => {
+      postLikes(item.idMeal);
+      getLikes(item.idMeal);
+    });
 
     const label = document.createElement('label');
     label.setAttribute('for', `${item.idMeal}`);
     label.innerHTML = likeTemplate;
+
+    const noLikes = document.createElement('span');
+    noLikes.classList.add('no-likes');
+    noLikes.innerHTML = '';
+    
+
 
     const btn = document.createElement('button');
     btn.classList.add('explore');
@@ -140,9 +148,12 @@ const render = (data) => {
       displayPopup();
     });
 
+    getLikes();
+
     info.appendChild(title);
     likeContainer.appendChild(likeInput);
     likeContainer.appendChild(label);
+    likeContainer.appendChild(noLikes);
     likeContainer.appendChild(btn);
     info.appendChild(likeContainer);
     card.appendChild(info);
@@ -160,4 +171,5 @@ document.addEventListener('DOMContentLoaded', async () => {
   const data = await getMeals(baseURl);
   render(data.meals);
   mealCounter();
+  renderLikes();
 });
