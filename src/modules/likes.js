@@ -14,15 +14,4 @@ const getLikes = async () => {
   }, {});
 };
 
-const renderLikes = async () => {
-  const data = await fetch(likesURL);
-  const likes = await data.json();
-  likes.forEach((like) => {
-    if (like.item_id) {
-      const element = document.querySelector(`.a${like.item_id}`);
-      element.textContent = `${like.likes} Likes`;
-    }
-  });
-};
-
-export { postLikes, getLikes, renderLikes };
+export { postLikes, getLikes };
