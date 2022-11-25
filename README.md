@@ -72,7 +72,7 @@
 
 ## 🚀 Project Details 
 
-- [Kanban Board](https://github.com/users/Zainab-Alzubair/projects/1)
+- [Kanban Board](https://github.com/lukman155/Rosto/projects/1)
 
 - Team      
         - [Ahmed Mohsen](https://github.com/AhmedMohsen600)
@@ -105,7 +105,7 @@ https://github.com/lukman155/Rosto.git
 -Type git clone in the terminal, paste the URL you copied earlier, and press "enter" to create your local clone.
 
 ```
-$ git clone {repository URL}
+$ git clone https://github.com/lukman155/Rosto.git
 ```
 
 # Install Dependencies(with following Command)
