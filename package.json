@@ -38,9 +38,13 @@
     "url-loader": "^4.1.1",
     "webpack": "^5.75.0",
     "webpack-cli": "^5.0.0",
-    "webpack-dev-server": "^4.11.1"
+    "webpack-dev-server": "^4.11.1",
+    "dotenv-webpack": "^8.0.1"
   },
   "jest": {
     "testEnvironment": "jsdom"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.3"
   }
 }
