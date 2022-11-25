@@ -3,8 +3,8 @@ import logo from './images/Rosto.jpg';
 import closeIcon from './images/x.svg';
 
 import { postLikes, getLikes } from './modules/likes.js';
-import mealCounter from './modules/counter.js';
-import { getMeals } from './modules/requests.js';
+import { mealCounter, commentsCounter } from './modules/counter.js';
+import { getMeals, getCommentsList, postComment } from './modules/requests.js';
 
 const logoImg = document.querySelector('.logo');
 const closeImg = document.querySelector('.close');
@@ -17,27 +17,10 @@ const handelBase = (category = 'Seafood') => {
   return `${baseURl}${category}`;
 };
 
-const commentsURL = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/QFvjY7RTqycik4cqN134/comments';
-const placeholderImg = 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.istockphoto.com%2Fphotos%2Fplaceholder-image&psig=AOvVaw1vn5H7sUkiIacQfXSh0py-&ust=1669294383106000&source=images&cd=vfe&ved=0CA8QjRxqFwoTCKi4qKesxPsCFQAAAAAdAAAAABAE';
+const placeholderImg =
+  'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.istockphoto.com%2Fphotos%2Fplaceholder-image&psig=AOvVaw1vn5H7sUkiIacQfXSh0py-&ust=1669294383106000&source=images&cd=vfe&ved=0CA8QjRxqFwoTCKi4qKesxPsCFQAAAAAdAAAAABAE';
 const form = document.querySelector('form');
-const postData = async (data = {}) => {
-  const postedData = await fetch(commentsURL, {
-    method: 'POST',
-    mode: 'cors',
-    cache: 'no-cache',
-    credentials: 'same-origin',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(data),
-  });
-  return postedData;
-};
 
-const getCommentsList = async (id) => {
-  const comments = await fetch(`${commentsURL}?item_id=${id}`);
-  return comments.json();
-};
 const likeTemplate = `
       <svg id="heart-svg" viewBox="467 392 58 57" xmlns="http://www.w3.org/2000/svg">
         <g id="Group" fill="none" fill-rule="evenodd" transform="translate(467 392)">
@@ -82,8 +65,7 @@ const likeTemplate = `
         </g>
       </svg>`;
 
-const displayCommentsList = async (id) => {
-  const data = await getCommentsList(id);
+const displayCommentsList = async (data) => {
   const commentsList = document.querySelector('.comments-list');
   commentsList.innerHTML = '';
   if (data.length) {
@@ -97,15 +79,8 @@ const displayCommentsList = async (id) => {
   } else commentsList.innerHTML = '<li>No comments</li>';
 };
 
-const commentsCounter = async (id) => {
-  const commentsData = await getCommentsList(id);
-  const commentsText = document.querySelector('.comments');
-  commentsText.textContent = `Comments (${
-    commentsData.length ? commentsData.length : 0
-  })`;
-};
-
-const displayPopup = (item, id) => {
+const displayPopup = async (item, id) => {
+  const data = await getCommentsList(id);
   const modal = document.querySelector('.overlay');
   const img = document.querySelector('.modal-img img');
   const productTitle = document.querySelector('.product-title');
@@ -113,8 +88,8 @@ const displayPopup = (item, id) => {
   img.src = item ? item.strMealThumb : placeholderImg;
   productTitle.textContent = item.strMeal;
   modal.classList.add('active-modal');
-  commentsCounter(id);
-  displayCommentsList(id);
+  commentsCounter(data);
+  displayCommentsList(data);
 };
 
 const render = async (data) => {
@@ -198,12 +173,30 @@ closeImg.addEventListener('click', () => {
 
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
+
   const username = document.querySelector('.name').value;
   const comment = document.querySelector('.insights').value;
   const popupId = form.parentElement.dataset.set;
-  await postData({ item_id: popupId, username, comment });
-  commentsCounter(popupId);
-  displayCommentsList(popupId);
+  await postComment({ item_id: popupId, username, comment });
+
+  const numberOfComments = document.querySelector('.comments').textContent;
+
+  document.querySelector('.comments').textContent = `${
+    Number(numberOfComments) + 1
+  }`;
+
+  const commentText = document.createElement('li');
+  commentText.classList.add('comment');
+  let date = new Date();
+  let year = date.toLocaleString('default', { year: 'numeric' });
+  let month = date.toLocaleString('default', { month: '2-digit' });
+  let day = date.toLocaleString('default', { day: '2-digit' });
+  let formatDate = `${year}-${month}-${day}`;
+
+  commentText.innerHTML = `<p>${formatDate}<p/>
+  <p>${username}<p/> 
+  <p>${comment}<p/>`;
+  document.querySelector('.comments-list').appendChild(commentText);
 
   form.reset();
 });
