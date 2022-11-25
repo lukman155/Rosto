@@ -1,5 +1,4 @@
-const commentsURL =
-  'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/QFvjY7RTqycik4cqN134/comments';
+const commentsURL = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/QFvjY7RTqycik4cqN134/comments';
 
 const postData = async (requestUrl, data = {}) => {
   const response = await fetch(requestUrl, {
@@ -41,4 +40,6 @@ const getCommentsList = async (id) => {
   return comments.json();
 };
 
-export { postData, getData, getMeals, getCommentsList };
+export {
+  postData, getData, getMeals, getCommentsList,
+};
