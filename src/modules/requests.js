@@ -1,5 +1,4 @@
-const baseURl =
-  'https://www.themealdb.com/api/json/v1/1/filter.php?i=chicken_breast';
+const baseURl = 'https://www.themealdb.com/api/json/v1/1/filter.php?i=chicken_breast';
 
 const postData = async (requestUrl, data = {}) => {
   const response = await fetch(requestUrl, {
@@ -22,4 +21,6 @@ const getMeals = async (url) => {
   return data.json();
 };
 
-export { baseURl, postData, getData, getMeals };
+export {
+  baseURl, postData, getData, getMeals,
+};

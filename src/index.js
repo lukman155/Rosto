@@ -17,10 +17,8 @@ const handelBase = (category = 'Seafood') => {
   return `${baseURl}${category}`;
 };
 
-const commentsURL =
-  'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/QFvjY7RTqycik4cqN134/comments';
-const placeholderImg =
-  'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.istockphoto.com%2Fphotos%2Fplaceholder-image&psig=AOvVaw1vn5H7sUkiIacQfXSh0py-&ust=1669294383106000&source=images&cd=vfe&ved=0CA8QjRxqFwoTCKi4qKesxPsCFQAAAAAdAAAAABAE';
+const commentsURL = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/QFvjY7RTqycik4cqN134/comments';
+const placeholderImg = 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.istockphoto.com%2Fphotos%2Fplaceholder-image&psig=AOvVaw1vn5H7sUkiIacQfXSh0py-&ust=1669294383106000&source=images&cd=vfe&ved=0CA8QjRxqFwoTCKi4qKesxPsCFQAAAAAdAAAAABAE';
 const form = document.querySelector('form');
 const postData = async (data = {}) => {
   const postedData = await fetch(commentsURL, {
@@ -121,7 +119,6 @@ const displayPopup = (item, id) => {
 
 const render = async (data) => {
   const likesData = await getLikes();
-  console.log('kooo', likesData);
   const container = document.querySelector('.container');
   container.innerHTML = '';
   data.meals.forEach((item) => {
