@@ -12,12 +12,13 @@ logoImg.src = logo;
 
 closeImg.src = closeIcon;
 
-const handelBase = (category = 'Seafood') => {
+const handelBase = (category = 'Beef') => {
   const baseURl = 'https://www.themealdb.com/api/json/v1/1/filter.php?c=';
   return `${baseURl}${category}`;
 };
 
-const placeholderImg = 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.istockphoto.com%2Fphotos%2Fplaceholder-image&psig=AOvVaw1vn5H7sUkiIacQfXSh0py-&ust=1669294383106000&source=images&cd=vfe&ved=0CA8QjRxqFwoTCKi4qKesxPsCFQAAAAAdAAAAABAE';
+const placeholderImg =
+  'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.istockphoto.com%2Fphotos%2Fplaceholder-image&psig=AOvVaw1vn5H7sUkiIacQfXSh0py-&ust=1669294383106000&source=images&cd=vfe&ved=0CA8QjRxqFwoTCKi4qKesxPsCFQAAAAAdAAAAABAE';
 const form = document.querySelector('form');
 
 const likeTemplate = `
