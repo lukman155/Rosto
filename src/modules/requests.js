@@ -1,6 +1,3 @@
-const baseURl = 'https://www.themealdb.com/api/json/v1/1/filter.php?i=chicken_breast';
-// const baseURl = 'https://www.themealdb.com/api/json/v1/1/filter.php?c=Chicken';
-
 const postData = async (requestUrl, data = {}) => {
   const response = await fetch(requestUrl, {
     method: 'POST',
@@ -23,5 +20,5 @@ const getMeals = async (url) => {
 };
 
 export {
-  baseURl, postData, getData, getMeals,
+  postData, getData, getMeals,
 };

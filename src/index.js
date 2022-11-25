@@ -4,9 +4,7 @@ import closeIcon from './images/x.svg';
 
 import { postLikes, getLikes, renderLikes } from './modules/likes.js';
 import mealCounter from './modules/counter.js';
-import { getMeals, baseURl } from './modules/requests.js';
-
-
+import { getMeals } from './modules/requests.js';
 
 const logoImg = document.querySelector('.logo');
 const closeImg = document.querySelector('.close');
@@ -35,7 +33,6 @@ const postData = async (data = {}) => {
   });
   return postedData;
 };
-
 
 const likeTemplate = `
       <svg id="heart-svg" viewBox="467 392 58 57" xmlns="http://www.w3.org/2000/svg">
@@ -80,6 +77,7 @@ const likeTemplate = `
           </g>
         </g>
       </svg>`;
+
 const displayCommentsList = async (id) => {
   const data = await getCommentsList(id);
   const commentsList = document.querySelector('.comments-list');
@@ -115,7 +113,6 @@ const displayPopup = (item, id) => {
   displayCommentsList(id);
 };
 
-
 const render = async (data) => {
   const container = document.querySelector('.container');
   container.innerHTML = '';
@@ -133,7 +130,6 @@ const render = async (data) => {
     const title = document.createElement('h2');
     title.classList.add('card-title');
     title.textContent = item.strMeal;
-
 
     const likeContainer = document.createElement('div');
     likeContainer.classList.add('like-container');
@@ -161,11 +157,11 @@ const render = async (data) => {
     const btn = document.createElement('button');
     btn.classList.add('explore');
     btn.textContent = 'View Recipe';
-     btn.addEventListener('click', async () => {
+    btn.addEventListener('click', async () => {
       const cardId = btn.parentElement.parentElement.dataset.set;
       displayPopup(item, cardId);
     });
-    
+
     info.appendChild(title);
     likeContainer.appendChild(likeInput);
     likeContainer.appendChild(label);
