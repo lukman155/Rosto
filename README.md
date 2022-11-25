@@ -197,8 +197,8 @@ You can deploy this project using:
 
 👤 **Lukman**
 
-- GitHub: [@Lukman](https://github.com/z4cope)
-- LinkedIn: [@Lukman](https://github.com/z4cope)
+- GitHub: [@Lukman](https://github.com/z4cope](https://github.com/lukman155)
+- LinkedIn: [@Lukman](https://github.com/z4cope](https://github.com/lukman155)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
