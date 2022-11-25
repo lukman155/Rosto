@@ -10,7 +10,7 @@ const getLikes = async () => {
   const data = await getData(likesURL);
   return data.reduce(
     (prev, current) => ({ ...prev, [`${current.item_id}`]: current }),
-    {}
+    {},
   );
 };
 

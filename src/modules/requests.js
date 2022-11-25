@@ -40,4 +40,6 @@ const getCommentsList = async (id) => {
   return comments.json();
 };
 
-export { postData, getData, getMeals, getCommentsList };
+export {
+  postData, getData, getMeals, getCommentsList,
+};
