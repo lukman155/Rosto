@@ -181,13 +181,16 @@ const render = async (data) => {
 document.addEventListener('DOMContentLoaded', async () => {
   const getData = await getMeals(handelBase());
   render(getData);
-  mealCounter();
+  setTimeout(() => {
+    mealCounter();
+  }, 500);
 });
 
 document.querySelectorAll('.nav-link').forEach((link) => {
   link.addEventListener('click', async () => {
     const data = await getMeals(handelBase(link.textContent));
     render(data);
+    mealCounter();
   });
 });
 
