@@ -158,7 +158,6 @@ const render = async (data) => {
     label.innerHTML = likeTemplate;
 
     const noLikes = document.createElement('span');
-    // noLikes.classList.add('no-likes');
     noLikes.classList.add(`a${item.idMeal}`);
 
     noLikes.textContent = `${likesData[item.idMeal]?.likes || 0} likes`;
@@ -172,10 +171,7 @@ const render = async (data) => {
     });
 
     info.appendChild(title);
-    likeContainer.appendChild(likeInput);
-    likeContainer.appendChild(label);
-    likeContainer.appendChild(noLikes);
-    likeContainer.appendChild(btn);
+    likeContainer.append(likeInput, label, noLikes, btn);
     info.appendChild(likeContainer);
     card.appendChild(info);
     container.appendChild(card);
