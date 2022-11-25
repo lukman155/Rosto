@@ -1,4 +1,4 @@
-const commentsURL = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/QFvjY7RTqycik4cqN134/comments';
+const commentsURL = `https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/${process.env.COMMENTS_KEY_AHMED}/comments`;
 
 const postData = async (requestUrl, data = {}) => {
   const response = await fetch(requestUrl, {
