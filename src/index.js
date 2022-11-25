@@ -1,61 +1,12 @@
 import './style.css';
 import logo from './images/Rosto.jpg';
+import { postLikes, getLikes, renderLikes } from './modules/likes.js';
+import mealCounter from './modules/counter.js';
+import { getMeals, baseURl } from './modules/requests.js';
 
 const logoImg = document.querySelector('.logo');
 
 logoImg.src = logo;
-const baseURl = 'https://www.themealdb.com/api/json/v1/1/filter.php?c=Chicken';
-const likesURL = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/pbKps4ug2DMf8oQt8nU7/likes/';
-
-const postData = async (requestUrl, data = {}) => {
-  const response = await fetch(requestUrl, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(data),
-  });
-  console.log(response);
-  return response;
-};
-
-const postLikes = (id) => {
-  postData(likesURL, { item_id: id });
-};
-
-const getData = async (requestUrl) => {
-  const data = await fetch(requestUrl);
-  return data.json();
-};
-
-const getLikes = async (id) => {
-  getData(likesURL)
-    .then((data) => {
-      data.forEach((like) => {
-        const element = document.querySelector(`.a${like.item_id}`);
-        if (like.item_id === id) {
-          console.log('working');
-          element.innerHTML = `${like.likes} Likes`;
-        }
-      });
-    });
-};
-
-const renderLikes = async () => {
-  const data = await fetch(likesURL);
-  const likes = await data.json();
-  likes.forEach((like) => {
-    if (like.item_id) {
-      const element = document.querySelector(`.a${like.item_id}`);
-      element.innerHTML = `${like.likes} Likes`;
-    }
-  });
-};
-
-const getMeals = async (url) => {
-  const data = await fetch(url);
-  return data.json();
-};
 
 const likeTemplate = `
       <svg id="heart-svg" viewBox="467 392 58 57" xmlns="http://www.w3.org/2000/svg">
@@ -123,9 +74,11 @@ const render = (data) => {
     likeInput.type = 'checkbox';
     likeInput.setAttribute('id', `${item.idMeal}`);
     likeInput.classList.add('checkbox');
-    likeInput.addEventListener('click', () => {
-      postLikes(item.idMeal);
-      getLikes(item.idMeal);
+    likeInput.addEventListener('change', () => {
+      if (likeInput.checked) {
+        postLikes(item.idMeal);
+        getLikes(item.idMeal);
+      }
     });
 
     const label = document.createElement('label');
@@ -135,7 +88,7 @@ const render = (data) => {
     const noLikes = document.createElement('span');
     noLikes.classList.add('no-likes');
     noLikes.classList.add(`a${item.idMeal}`);
-    noLikes.innerHTML = '';
+    noLikes.textContent = '';
 
     const btn = document.createElement('button');
     btn.classList.add('explore');
@@ -143,8 +96,6 @@ const render = (data) => {
     btn.addEventListener('click', () => {
 
     });
-
-    getLikes();
 
     info.appendChild(title);
     likeContainer.appendChild(likeInput);
@@ -155,12 +106,6 @@ const render = (data) => {
     card.appendChild(info);
     container.appendChild(card);
   });
-};
-
-const mealCounter = () => {
-  const container = document.querySelector('.container');
-  const mealcounter = document.querySelector('.meal-count');
-  mealcounter.innerHTML = `(${container.children.length} recipes available)`;
 };
 
 document.addEventListener('DOMContentLoaded', async () => {
