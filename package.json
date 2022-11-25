@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/lukman155/Rosto#readme",
   "devDependencies": {
+    "@babel/preset-env": "^7.20.2",
     "babel-eslint": "^10.1.0",
     "css-loader": "^6.7.2",
     "eslint": "^7.32.0",
@@ -37,5 +38,10 @@
     "webpack": "^5.75.0",
     "webpack-cli": "^5.0.0",
     "webpack-dev-server": "^4.11.1"
+  },
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.16.5",
+    "jest-dom": "^4.0.0",
+    "jest-environment-jsdom": "^29.3.1"
   }
 }
