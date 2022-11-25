@@ -10,9 +10,12 @@
     <header class="header">
       <nav class="nav">
         <a href="#"><img class="logo" alt="" /></a>
-        <a href="#" class="nav-link beef">Beef <span class="meal-count"></span></a>
-        <a href="" class="nav-link">Chicken <span class="meal-count"></span></a>
-        <a href="" class="nav-link">Seafood <span class="meal-count"></span></a>
+
+
+        <li class="nav-link beef">Beef</li>
+        <li class="nav-link">Chicken</li>
+        <li class="nav-link">Seafood</li>
+
       </nav>
     </header>
     <main>
@@ -21,17 +24,24 @@
       </section>
       <section class="overlay">
         <article class="modal">
-          <div class="modal-img">
-            <img src="" alt="" />
+          <div class="group">
+            <div class="modal-img">
+              <img src="" alt="" />
+            </div>
+            <img class="close" alt="close" />
           </div>
           <h3 class="product-title">title</h3>
           <span>TAGS</span>
           <p class="comments"></p>
           <ul class="comments-list"></ul>
           <h3 class="add-comment">Add comment</h3>
-          <form action="POST">
-            <input class="name" type="text" />
-            <input class="insights" type="text" />
+          <form>
+            <input placeholder="Write your name" class="name" type="text" />
+            <input
+              placeholder="Write your insights"
+              class="insights"
+              type="text"
+            />
             <button type="submit">Comment</button>
           </form>
         </article>
