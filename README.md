@@ -75,15 +75,15 @@
 - [Kanban Board](https://github.com/users/Zainab-Alzubair/projects/1)
 
 - Team      
-        - [Zainab Alzubair](https://github.com/Zainab-Alzubair)
-        - [Mohamed Khaled](https://github.com/z4cope)
+        - [Ahmed Mohsen](https://github.com/AhmedMohsen600)
+        - [Lukman](https://github.com/lukman155)
 
      
 ## 🚀 Pull Request
 
-[Zainab](https://github.com/Zainab-Alzubair/the-meal/pull/25)
+[Lukman](https://github.com/lukman155/Rosto/pull/29)
 
-[Mohamed](https://github.com/Zainab-Alzubair/the-meal/pull/24))
+[Ahmed](https://github.com/lukman155/Rosto/pull/25)
 
 
 ## 💻 Getting Started <a name="getting-started"></a>
@@ -190,15 +190,15 @@ You can deploy this project using:
 
 ## 👥 Authors <a name="authors"></a>
 
-👤 **Zainab Alzubair**
+👤 **Ahmed Mohsen**
 
-- GitHub: [@Zainab-Alzubair](https://github.com/Zainab-Alzubair)
-- LinkedIn: [@Zainab-Alzubair](https://www.linkedin.com/in/zainab-al-zubair-bb6777168/)
+- GitHub: [@Ahmed Mohsen](https://github.com/AhmedMohsen600)
+- LinkedIn: [@Ahmed Mohsen](https://www.linkedin.com/in/ahmed-mohsen-bb75b2194/)
 
-👤 **Mohamed Khaled**
+👤 **Lukman**
 
-- GitHub: [@Mohamed Khaled](https://github.com/z4cope)
-- LinkedIn: [@Mohamed Khaled](https://github.com/z4cope)
+- GitHub: [@Lukman](https://github.com/z4cope)
+- LinkedIn: [@Lukman](https://github.com/z4cope)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
