@@ -1,6 +1,4 @@
-/** @jest-environment jsdom */
-import mealCounter from './counter.js';
-import '@testing-library/jest-dom';
+import { mealCounter } from './counter.js';
 
 describe('mealCounter', () => {
   beforeEach(() => {
@@ -17,6 +15,8 @@ describe('mealCounter', () => {
     mealCounter();
   });
   test('should display the number of meals available', () => {
-    expect(document.querySelector('.meal-count').innerHTML).toBe('(6 recipes available)');
+    expect(document.querySelector('.meal-count').innerHTML).toBe(
+      '(6 recipes available)',
+    );
   });
 });
