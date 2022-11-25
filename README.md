@@ -94,7 +94,7 @@ To get a local copy up and running follow these simple example steps.
 
 -Reach to following Github URL:
 ```
-https://github.com/Zainab-Alzubair/the-meal
+https://github.com/lukman155/Rosto.git
 
 ```
 
@@ -141,9 +141,9 @@ Clone this repository to your desired folder:
 
     _cd PATH_
     
-    _git clone https://github.com/Zainab-Alzubair/the-meal.git_
+    _git clone https://github.com/lukman155/Rosto.git
    
-   _cd Javascript-Group-Capstone_
+   _cd Rosto
    
    _npm install_
       
@@ -197,8 +197,8 @@ You can deploy this project using:
 
 👤 **Lukman**
 
-- GitHub: [@Lukman](https://github.com/z4cope](https://github.com/lukman155)
-- LinkedIn: [@Lukman](https://github.com/z4cope](https://github.com/lukman155)
+- GitHub: [@Lukman](https://github.com/lukman155)
+- LinkedIn: [@Lukman](https://github.com/lukman155)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
