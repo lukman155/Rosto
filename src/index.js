@@ -2,7 +2,7 @@ import './style.css';
 import logo from './images/Rosto.jpg';
 import closeIcon from './images/x.svg';
 
-import { postLikes, getLikes, renderLikes } from './modules/likes.js';
+import { postLikes, getLikes } from './modules/likes.js';
 import mealCounter from './modules/counter.js';
 import { getMeals } from './modules/requests.js';
 
@@ -17,8 +17,10 @@ const handelBase = (category = 'Seafood') => {
   return `${baseURl}${category}`;
 };
 
-const commentsURL = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/QFvjY7RTqycik4cqN134/comments';
-const placeholderImg = 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.istockphoto.com%2Fphotos%2Fplaceholder-image&psig=AOvVaw1vn5H7sUkiIacQfXSh0py-&ust=1669294383106000&source=images&cd=vfe&ved=0CA8QjRxqFwoTCKi4qKesxPsCFQAAAAAdAAAAABAE';
+const commentsURL =
+  'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/QFvjY7RTqycik4cqN134/comments';
+const placeholderImg =
+  'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.istockphoto.com%2Fphotos%2Fplaceholder-image&psig=AOvVaw1vn5H7sUkiIacQfXSh0py-&ust=1669294383106000&source=images&cd=vfe&ved=0CA8QjRxqFwoTCKi4qKesxPsCFQAAAAAdAAAAABAE';
 const form = document.querySelector('form');
 const postData = async (data = {}) => {
   const postedData = await fetch(commentsURL, {
@@ -34,6 +36,10 @@ const postData = async (data = {}) => {
   return postedData;
 };
 
+const getCommentsList = async (id) => {
+  const comments = await fetch(`${commentsURL}?item_id=${id}`);
+  return comments.json();
+};
 const likeTemplate = `
       <svg id="heart-svg" viewBox="467 392 58 57" xmlns="http://www.w3.org/2000/svg">
         <g id="Group" fill="none" fill-rule="evenodd" transform="translate(467 392)">
@@ -114,6 +120,8 @@ const displayPopup = (item, id) => {
 };
 
 const render = async (data) => {
+  const likesData = await getLikes();
+  console.log('kooo', likesData);
   const container = document.querySelector('.container');
   container.innerHTML = '';
   data.meals.forEach((item) => {
@@ -141,7 +149,10 @@ const render = async (data) => {
     likeInput.addEventListener('change', () => {
       if (likeInput.checked) {
         postLikes(item.idMeal);
-        getLikes(item.idMeal);
+        const element = document.querySelector(`.a${item.idMeal}`);
+        let likesCount = element.textContent.split(' ')[0];
+        likesCount = parseInt(likesCount, 10) + 1;
+        element.textContent = `${likesCount} likes`;
       }
     });
 
@@ -150,15 +161,16 @@ const render = async (data) => {
     label.innerHTML = likeTemplate;
 
     const noLikes = document.createElement('span');
-    noLikes.classList.add('no-likes');
+    // noLikes.classList.add('no-likes');
     noLikes.classList.add(`a${item.idMeal}`);
-    noLikes.textContent = '';
+
+    noLikes.textContent = `${likesData[item.idMeal]?.likes || 0} likes`;
 
     const btn = document.createElement('button');
     btn.classList.add('explore');
     btn.textContent = 'View Recipe';
     btn.addEventListener('click', async () => {
-      const cardId = btn.parentElement.parentElement.dataset.set;
+      const cardId = btn.parentElement.parentElement.parentElement.dataset.set;
       displayPopup(item, cardId);
     });
 
@@ -177,7 +189,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   const getData = await getMeals(handelBase());
   render(getData);
   mealCounter();
-  renderLikes();
 });
 
 document.querySelectorAll('.nav-link').forEach((link) => {
