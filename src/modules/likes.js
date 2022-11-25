@@ -1,25 +1,17 @@
 import { postData, getData } from './requests.js';
 
-const likesURL = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/4OI0ZtaDIMh4pRk2DGft/likes/';
+const likesURL =
+  'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/4OI0ZtaDIMh4pRk2DGft/likes/';
 
 const postLikes = (id) => {
   postData(likesURL, { item_id: id });
 };
 
-const getLikes = async (id) => {
-  getData(likesURL)
-    .then((data) => {
-      data.forEach((like) => {
-        const element = document.querySelector(`.a${like.item_id}`);
-        if (like.item_id === id) {
-          let likesCount = element.innerHTML;
-          likesCount = likesCount.replace(/[^0-9]/g, '');
-          likesCount = parseInt(likesCount, 10);
-          likesCount += 1;
-          element.textContent = `${likesCount} Likes`;
-        }
-      });
-    });
+const getLikes = async () => {
+  const data = await getData(likesURL);
+  return data.reduce((prev, current) => {
+    return { ...prev, [`${current.item_id}`]: current };
+  }, {});
 };
 
 const renderLikes = async () => {
