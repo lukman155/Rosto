@@ -7,10 +7,14 @@ const closeImg = document.querySelector('.close');
 logoImg.src = logo;
 closeImg.src = closeIcon;
 
-const baseURl = 'https://www.themealdb.com/api/json/v1/1/filter.php?c=Chicken';
+const handelBase = (category = 'Seafood') => {
+  const baseURl = 'https://www.themealdb.com/api/json/v1/1/filter.php?c=';
+  return `${baseURl}${category}`;
+};
 
 const commentsURL = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/QFvjY7RTqycik4cqN134/comments';
 const placeholderImg = 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.istockphoto.com%2Fphotos%2Fplaceholder-image&psig=AOvVaw1vn5H7sUkiIacQfXSh0py-&ust=1669294383106000&source=images&cd=vfe&ved=0CA8QjRxqFwoTCKi4qKesxPsCFQAAAAAdAAAAABAE';
+const form = document.querySelector('form');
 const postData = async (data = {}) => {
   const postedData = await fetch(commentsURL, {
     method: 'POST',
@@ -58,34 +62,24 @@ const commentsCounter = async (id) => {
   })`;
 };
 
-const displayPopup = async (item) => {
+const displayPopup = (item, id) => {
   const modal = document.querySelector('.overlay');
   const img = document.querySelector('.modal-img img');
   const productTitle = document.querySelector('.product-title');
-  const form = document.querySelector('form');
+  form.parentElement.setAttribute('data-set', id);
   img.src = item ? item.strMealThumb : placeholderImg;
   productTitle.textContent = item.strMeal;
   modal.classList.add('active-modal');
-  commentsCounter(item.idMeal);
-  displayCommentsList(item.idMeal);
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const username = document.querySelector('.name').value;
-    const comment = document.querySelector('.insights').value;
-    await postData({ item_id: item.idMeal, username, comment });
-    commentsCounter(item.idMeal);
-    displayCommentsList(item.idMeal);
-
-    form.reset();
-  });
+  commentsCounter(id);
+  displayCommentsList(id);
 };
 
-const render = async () => {
-  const data = await getMeals(baseURl);
+const render = async (data) => {
   const container = document.querySelector('.container');
   container.innerHTML = '';
   data.meals.forEach((item) => {
     const card = document.createElement('li');
+    card.setAttribute('data-set', item.idMeal);
     card.classList.add('card');
     card.innerHTML = `
       <div class='img-holder'>
@@ -100,20 +94,41 @@ const render = async () => {
     const btn = document.createElement('button');
     btn.classList.add('explore');
     btn.textContent = 'View Recipe';
-    btn.addEventListener('click', () => {
-      displayPopup(item);
-    });
-
-    info.appendChild(title);
-    info.appendChild(btn);
+    info.append(title, btn);
     card.appendChild(info);
     container.appendChild(card);
+    btn.addEventListener('click', async () => {
+      const cardId = btn.parentElement.parentElement.dataset.set;
+      displayPopup(item, cardId);
+    });
   });
 };
 
-document.addEventListener('DOMContentLoaded', render);
+document.addEventListener('DOMContentLoaded', async () => {
+  const getData = await getMeals(handelBase());
+  render(getData);
+});
+
+document.querySelectorAll('.nav-link').forEach((link) => {
+  link.addEventListener('click', async () => {
+    const data = await getMeals(handelBase(link.textContent));
+    render(data);
+  });
+});
 
 closeImg.addEventListener('click', () => {
   const modal = document.querySelector('.overlay');
   modal.classList.remove('active-modal');
+});
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const username = document.querySelector('.name').value;
+  const comment = document.querySelector('.insights').value;
+  const popupId = form.parentElement.dataset.set;
+  await postData({ item_id: popupId, username, comment });
+  commentsCounter(popupId);
+  displayCommentsList(popupId);
+
+  form.reset();
 });
