@@ -17,8 +17,7 @@ const handelBase = (category = 'Seafood') => {
   return `${baseURl}${category}`;
 };
 
-const placeholderImg =
-  'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.istockphoto.com%2Fphotos%2Fplaceholder-image&psig=AOvVaw1vn5H7sUkiIacQfXSh0py-&ust=1669294383106000&source=images&cd=vfe&ved=0CA8QjRxqFwoTCKi4qKesxPsCFQAAAAAdAAAAABAE';
+const placeholderImg = 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.istockphoto.com%2Fphotos%2Fplaceholder-image&psig=AOvVaw1vn5H7sUkiIacQfXSh0py-&ust=1669294383106000&source=images&cd=vfe&ved=0CA8QjRxqFwoTCKi4qKesxPsCFQAAAAAdAAAAABAE';
 const form = document.querySelector('form');
 
 const likeTemplate = `
@@ -190,11 +189,11 @@ form.addEventListener('submit', async (e) => {
 
   const commentText = document.createElement('li');
   commentText.classList.add('comment');
-  let date = new Date();
-  let year = date.toLocaleString('default', { year: 'numeric' });
-  let month = date.toLocaleString('default', { month: '2-digit' });
-  let day = date.toLocaleString('default', { day: '2-digit' });
-  let formatDate = `${year}-${month}-${day}`;
+  const date = new Date();
+  const year = date.toLocaleString('default', { year: 'numeric' });
+  const month = date.toLocaleString('default', { month: '2-digit' });
+  const day = date.toLocaleString('default', { day: '2-digit' });
+  const formatDate = `${year}-${month}-${day}`;
 
   commentText.innerHTML = `<p>${formatDate}<p/>
   <p>${username}<p/> 

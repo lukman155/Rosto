@@ -1,4 +1,5 @@
 import { mealCounter } from './counter.js';
+
 describe('mealCounter', () => {
   beforeEach(() => {
     document.body.innerHTML = `
@@ -15,7 +16,7 @@ describe('mealCounter', () => {
   });
   test('should display the number of meals available', () => {
     expect(document.querySelector('.meal-count').innerHTML).toBe(
-      '(6 recipes available)'
+      '(6 recipes available)',
     );
   });
 });
