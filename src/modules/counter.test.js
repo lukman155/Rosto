@@ -1,17 +1,21 @@
-import { commentsCounter } from './counter.js';
-
-jest.mock('./requests');
-
-describe('commens counter test', () => {
-  test('should render comments counter ', () => {
-    document.body.innerHTML = `<p>Comments (<span class="comments"></span>)</p>`;
-
-    commentsCounter([
-      { creation_date: '2022-11-24', username: 'jo', comment: 'bo' },
-      { creation_date: '2022-11-24', username: 'mo', comment: 'bo' },
-    ]);
-
-    const commentsText = document.querySelector('.comments').textContent;
-    expect(Number(commentsText)).toEqual(2);
+import { mealCounter } from './counter.js';
+describe('mealCounter', () => {
+  beforeEach(() => {
+    document.body.innerHTML = `
+        <div class="meal-count"></div>
+        <div class="container">
+            <div class="card"></div>
+            <div class="card"></div>
+            <div class="card"></div>
+            <div class="card"></div>
+            <div class="card"></div>
+            <div class="card"></div>
+        </div>`;
+    mealCounter();
+  });
+  test('should display the number of meals available', () => {
+    expect(document.querySelector('.meal-count').innerHTML).toBe(
+      '(6 recipes available)'
+    );
   });
 });
