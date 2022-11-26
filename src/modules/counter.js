@@ -1,7 +1,7 @@
 export const mealCounter = () => {
   const container = document.querySelector('.container');
   const mealcounter = document.querySelector('.meal-count');
-  mealcounter.innerHTML = `(${
+  mealcounter.textContent = `(${
     container.children.length || 0
   } recipes available)`;
 };

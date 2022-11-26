@@ -4,18 +4,18 @@ import closeIcon from './images/x.svg';
 
 import { postLikes, getLikes } from './modules/likes.js';
 import { mealCounter, commentsCounter } from './modules/counter.js';
-import { getMeals, getCommentsList, postComment } from './modules/requests.js';
+import {
+  getMeals,
+  getCommentsList,
+  postComment,
+  handelBase,
+} from './modules/requests.js';
 
 const logoImg = document.querySelector('.logo');
 const closeImg = document.querySelector('.close');
 logoImg.src = logo;
 
 closeImg.src = closeIcon;
-
-const handelBase = (category = 'Beef') => {
-  const baseURl = 'https://www.themealdb.com/api/json/v1/1/filter.php?c=';
-  return `${baseURl}${category}`;
-};
 
 const placeholderImg = 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.istockphoto.com%2Fphotos%2Fplaceholder-image&psig=AOvVaw1vn5H7sUkiIacQfXSh0py-&ust=1669294383106000&source=images&cd=vfe&ved=0CA8QjRxqFwoTCKi4qKesxPsCFQAAAAAdAAAAABAE';
 const form = document.querySelector('form');
@@ -153,10 +153,10 @@ const render = async (data) => {
 };
 
 document.addEventListener('DOMContentLoaded', async () => {
-  const getData = await getMeals(handelBase());
-  render(getData);
+  const data = await getMeals(handelBase());
+  render(data);
   setTimeout(() => {
-    mealCounter();
+    mealCounter(data);
   }, 500);
 });
 
@@ -164,7 +164,9 @@ document.querySelectorAll('.nav-link').forEach((link) => {
   link.addEventListener('click', async () => {
     const data = await getMeals(handelBase(link.textContent));
     render(data);
-    mealCounter();
+    setTimeout(() => {
+      mealCounter(data);
+    }, 550);
   });
 });
 
