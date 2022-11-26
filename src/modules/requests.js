@@ -45,4 +45,6 @@ const handelBase = (category = 'Beef') => {
   return `${baseURl}${category}`;
 };
 
-export { postData, getData, getMeals, getCommentsList, handelBase };
+export {
+  postData, getData, getMeals, getCommentsList, handelBase,
+};
