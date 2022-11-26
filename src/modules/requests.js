@@ -40,6 +40,9 @@ const getCommentsList = async (id) => {
   return comments.json();
 };
 
-export {
-  postData, getData, getMeals, getCommentsList,
+const handelBase = (category = 'Beef') => {
+  const baseURl = 'https://www.themealdb.com/api/json/v1/1/filter.php?c=';
+  return `${baseURl}${category}`;
 };
+
+export { postData, getData, getMeals, getCommentsList, handelBase };
